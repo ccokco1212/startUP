@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour Info - GYGO</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fdf6f0;
+    }
+
+    header {
+      background-color: #ff7f00;
+      color: white;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .lang-toggle button {
+      background-color: white;
+      color: #ff7f00;
+      border: none;
+      padding: 0.4em 1em;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 0.2em;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: auto;
+    }
+
+    .sidebar {
+      width: 100%;
+      max-width: 200px;
+      background-color: #ffe3c4;
+      padding: 1em;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin: 1em 0;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 2em;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar, .content {
+        width: 100%;
+      }
+
+      .content {
+        padding: 1em;
+      }
+    }
+
+    h2 {
+      color: #ff7f00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="header-title">Tour Info</h1>
+    <div class="lang-toggle">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('zh')">中文</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="MainPage.html">Main Page</a></li>
+        <li><a href="TourInfo.html" id="link-tour">Tour Info</a></li>
+        <li><a href="Emergency.html" id="link-emergency">Emergency</a></li>
+        <li><a href="#qr" id="link-qr">How to use QR code</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h2 id="tour-info">Welcome to Gyeongju!</h2>
+      <div style="margin-bottom: 1em;">
+        <input type="text" id="address-input" placeholder="Enter address" style="padding: 0.5em; width: 60%; max-width: 400px;">
+        <select id="category-select" style="padding: 0.5em;">
+          <option value="">Select category</option>
+          <option value="tour">Tourist Attraction</option>
+          <option value="food">Restaurant</option>
+          <option value="cafe">Cafe</option>
+        </select>
+        <button onclick="searchPlaces()" style="padding: 0.5em 1em; background-color: #ff7f00; color: white; border: none; border-radius: 5px;">Search</button>
+      </div>
+
+      <div id="place-cards" style="display: flex; flex-wrap: wrap; gap: 1em;"></div>
+
+      <div id="plan-box" style="margin-top: 2em;">
+        <h3 id="plan-title" style="color: #ff7f00;">📝 My Plan</h3>
+        <ul id="plan-list" style="list-style: none; padding-left: 0;"></ul>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function setLanguage(lang) {
+      if (lang === 'en') {
+        document.getElementById('header-title').innerText = 'Tour Info';
+        document.getElementById('link-tour').innerText = 'Tour Info';
+        document.getElementById('link-emergency').innerText = 'Emergency';
+        document.getElementById('link-qr').innerText = 'How to use QR code';
+        document.getElementById('tour-info').innerText = 'Welcome to Gyeongju!';
+        document.getElementById('address-input').placeholder = 'Enter address';
+        document.querySelector('select').options[0].text = 'Select category';
+        document.querySelector('select').options[1].text = 'Tourist Attraction';
+        document.querySelector('select').options[2].text = 'Restaurant';
+        document.querySelector('select').options[3].text = 'Cafe';
+        document.querySelector('button[onclick="searchPlaces()"]').innerText = 'Search';
+        document.getElementById('plan-title').innerText = '📝 My Plan';
+      } else if (lang === 'zh') {
+        document.getElementById('header-title').innerText = '旅游信息';
+        document.getElementById('link-tour').innerText = '旅游信息';
+        document.getElementById('link-emergency').innerText = '紧急信息';
+        document.getElementById('link-qr').innerText = '二维码使用方法';
+        document.getElementById('tour-info').innerText = '欢迎来到庆州！';
+        document.getElementById('address-input').placeholder = '请输入地址';
+        document.querySelector('select').options[0].text = '选择类别';
+        document.querySelector('select').options[1].text = '旅游景点';
+        document.querySelector('select').options[2].text = '餐厅';
+        document.querySelector('select').options[3].text = '咖啡馆';
+        document.querySelector('button[onclick="searchPlaces()"]').innerText = '搜索';
+        document.getElementById('plan-title').innerText = '📝 我的行程';
+      }
+    }
+
+    function searchPlaces() {
+      const container = document.getElementById('place-cards');
+      container.innerHTML = '';
+
+      const samplePlaces = [
+        { name: 'Cheomseongdae Observatory', category: 'tour' },
+        { name: 'Hwangridan-gil Cafe', category: 'cafe' },
+        { name: 'Gyeongju Bulgogi Restaurant', category: 'food' }
+      ];
+
+      samplePlaces.forEach((place, index) => {
+        const card = document.createElement('div');
+        card.style.border = '1px solid #ccc';
+        card.style.padding = '1em';
+        card.style.borderRadius = '10px';
+        card.style.backgroundColor = '#fff';
+        card.style.width = '200px';
+        card.innerHTML = `
+          <strong>${place.name}</strong>
+          <button onclick="addToPlan('${place.name}')" style="float: right; background-color: #ff7f00; color: white; border: none; border-radius: 50%; width: 30px; height: 30px;">+</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function addToPlan(name) {
+      const list = document.getElementById('plan-list');
+      const item = document.createElement('li');
+      item.textContent = name;
+      list.appendChild(item);
+    }
+  </script>
+</body>
+</html>

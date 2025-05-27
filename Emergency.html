@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency - GYGO</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fdf6f0;
+    }
+
+    header {
+      background-color: #ff7f00;
+      color: white;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lang-toggle button {
+      background-color: white;
+      color: #ff7f00;
+      border: none;
+      padding: 0.4em 1em;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    .content {
+      padding: 2em;
+    }
+
+    h2 {
+      color: #ff7f00;
+    }
+
+    .emergency-option {
+      background-color: white;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .emergency-option button {
+      background-color: #ff7f00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="header-title">Emergency Info</h1>
+    <div class="lang-toggle">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('zh')">中文</button>
+    </div>
+  </header>
+
+  <div class="content">
+    <h2 id="emergency-title">What kind of help do you need?</h2>
+
+    <div class="emergency-option">
+      <strong id="option-police">I need the police.</strong>
+      <p id="desc-police">Call or text 112.</p>
+      <button>📞</button>
+    </div>
+
+    <div class="emergency-option">
+      <strong id="option-ambulance">I need an ambulance/fire truck.</strong>
+      <p id="desc-ambulance">Call or text 119.</p>
+      <button>📞</button>
+    </div>
+
+    <div class="emergency-option">
+      <strong id="option-tourism">I need help with tourism.</strong>
+      <p id="desc-tourism">The Korea Tourism Organization offers assistance with information, interpretation, and complaints.</p>
+      <button>📞</button>
+    </div>
+  </div>
+
+  <script>
+    function setLanguage(lang) {
+      if (lang === 'en') {
+        document.getElementById('header-title').innerText = 'Emergency Info';
+        document.getElementById('emergency-title').innerText = 'What kind of help do you need?';
+        document.getElementById('option-police').innerText = 'I need the police.';
+        document.getElementById('desc-police').innerText = 'Call or text 112.';
+        document.getElementById('option-ambulance').innerText = 'I need an ambulance/fire truck.';
+        document.getElementById('desc-ambulance').innerText = 'Call or text 119.';
+        document.getElementById('option-tourism').innerText = 'I need help with tourism.';
+        document.getElementById('desc-tourism').innerText = 'The Korea Tourism Organization offers assistance with information, interpretation, and complaints.';
+      } else if (lang === 'zh') {
+        document.getElementById('header-title').innerText = '紧急信息';
+        document.getElementById('emergency-title').innerText = '您需要什么帮助？';
+        document.getElementById('option-police').innerText = '我需要警察帮助。';
+        document.getElementById('desc-police').innerText = '请拨打或发送短信至112。';
+        document.getElementById('option-ambulance').innerText = '我需要救护车或消防车。';
+        document.getElementById('desc-ambulance').innerText = '请拨打或发送短信至119。';
+        document.getElementById('option-tourism').innerText = '我需要旅游相关的帮助。';
+        document.getElementById('desc-tourism').innerText = '韩国观光公社提供信息、翻译和投诉帮助。';
+      }
+    }
+  </script>
+</body>
+</html>

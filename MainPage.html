@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GYGO - Gyeongju Guide for Outsiders</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://res.cloudinary.com/kyte/image/upload/w_1200,h_630,q_auto,e_sharpen:50,c_fill,g_auto/v1602500628/content/free/KR/gyeongju_1') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      background-color: rgba(255, 127, 0, 0.9);
+      color: white;
+      padding: 1em;
+      text-align: center;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .lang-toggle button {
+      background-color: white;
+      color: #ff7f00;
+      border: none;
+      margin-left: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0.3em 0.7em;
+      border-radius: 5px;
+    }
+
+    #intro {
+      text-align: center;
+      padding: 2em;
+      background-color: rgba(255, 255, 255, 0.85);
+      margin: 2em;
+      border-radius: 10px;
+    }
+
+    #intro button {
+      background-color: #ff7f00;
+      color: white;
+      border: none;
+      padding: 1em 2em;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 1em;
+    }
+
+    #features {
+      padding: 2em;
+      background-color: rgba(255, 240, 219, 0.9);
+      margin: 2em;
+      border-radius: 10px;
+    }
+
+    #features ul {
+      max-width: 600px;
+      margin: 0 auto;
+      padding-left: 1.2em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title">GYGO: Gyeongju Guide for Outsiders</h1>
+    <div class="lang-toggle">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('zh')">中文</button>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="TourInfo.html" id="nav-info">Tour Info</a></li>
+        <li><a href="Emergency.html" id="nav-emergency">Emergency</a></li>
+        <li><a href="#intro" id="nav-qr">How to use QR code</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="intro">
+    <h2 id="intro-heading">A web platform for foreign tourists in Gyeongju</h2>
+    <p id="intro-text">Access easily via QR code—no app installation needed! Get info on attractions, food, transport, and emergencies all in one place.</p>
+    <button onclick="handleQRCodeClick()" id="qr-button">Explore Gyeongju</button>
+  </section>
+
+  <section id="features">
+  <h3 style="text-align: center;">Key Features</h3>
+  <ul>
+    <li>
+      Multilingual tourism info (Chinese, English)
+      <ul>
+        <li>Automatic translation of key location details</li>
+        <li>Language toggle for seamless user experience</li>
+      </ul>
+    </li>
+    <li>
+      Tourist attractions, restaurants, cafes with navigation
+      <ul>
+        <li>Recommended routes between nearby points of interest</li>
+        <li>Enter an address to receive nearby recommendations for attractions, restaurants, and cafes</li>
+      </ul>
+    </li>
+    <li>
+      Emergency response info support
+      <ul>
+        <li>Contact numbers for hospitals and tourist help centers</li>
+        <li>Essential phrases and guidance for urgent situations</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+  <footer>
+    <p>&copy; 2025 GYGO. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function handleQRCodeClick() {
+      window.location.href = 'TourInfo.html';
+    }
+
+    function setLanguage(lang) {
+      if (lang === 'en') {
+        document.getElementById('title').innerText = 'GYGO: Gyeongju Guide for Outsiders';
+        document.getElementById('nav-info').innerText = 'Tour Info';
+        document.getElementById('nav-emergency').innerText = 'Emergency';
+        document.getElementById('nav-qr').innerText = 'How to use QR code';
+        document.getElementById('intro-heading').innerText = 'A web platform for foreign tourists in Gyeongju';
+        document.getElementById('intro-text').innerText = 'Access easily via QR code—no app installation needed! Get info on attractions, food, transport, and emergencies all in one place.';
+        document.getElementById('qr-button').innerText = 'Explore Gyeongju';
+      } else if (lang === 'zh') {
+        document.getElementById('title').innerText = 'GYGO：为外国游客提供的庆州旅游指南';
+        document.getElementById('nav-info').innerText = '旅游信息';
+        document.getElementById('nav-emergency').innerText = '紧急信息';
+        document.getElementById('nav-qr').innerText = '二维码使用方法';
+        document.getElementById('intro-heading').innerText = '为来庆州的外国游客提供的网页平台';
+        document.getElementById('intro-text').innerText = '通过二维码轻松访问——无需安装应用！一站式获取景点、美食、交通和紧急信息。';
+        document.getElementById('qr-button').innerText = '庆州之旅';
+      }
+    }
+  </script>
+</body>
+</html>

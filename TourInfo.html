@@ -21,6 +21,17 @@
       flex-wrap: wrap;
     }
 
+    .nav-menu {
+      display: flex;
+      gap: 1.5em;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
     .lang-toggle button {
       background-color: white;
       color: #ff7f00;
@@ -29,57 +40,11 @@
       font-weight: bold;
       cursor: pointer;
       border-radius: 5px;
-      margin: 0.2em;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      height: auto;
-    }
-
-    .sidebar {
-      width: 100%;
-      max-width: 200px;
-      background-color: #ffe3c4;
-      padding: 1em;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .sidebar li {
-      margin: 1em 0;
-    }
-
-    .sidebar a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
+      margin-left: 10px;
     }
 
     .content {
-      flex-grow: 1;
       padding: 2em;
-    }
-
-    @media screen and (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .sidebar, .content {
-        width: 100%;
-      }
-
-      .content {
-        padding: 1em;
-      }
     }
 
     h2 {
@@ -90,43 +55,38 @@
 <body>
   <header>
     <h1 id="header-title">Tour Info</h1>
+    <nav class="nav-menu">
+      <a href="MainPage.html">Main Page</a>
+      <a href="TourInfo.html" id="link-tour">Tour Info</a>
+      <a href="Emergency.html" id="link-emergency">Emergency</a>
+      <a href="#qr" id="link-qr">How to use QR code</a>
+    </nav>
     <div class="lang-toggle">
       <button onclick="setLanguage('en')">EN</button>
       <button onclick="setLanguage('zh')">中文</button>
     </div>
   </header>
 
-  <div class="container">
-    <aside class="sidebar">
-      <ul>
-        <li><a href="MainPage.html">Main Page</a></li>
-        <li><a href="TourInfo.html" id="link-tour">Tour Info</a></li>
-        <li><a href="Emergency.html" id="link-emergency">Emergency</a></li>
-        <li><a href="#qr" id="link-qr">How to use QR code</a></li>
-      </ul>
-    </aside>
+  <main class="content">
+    <h2 id="tour-info">Welcome to Gyeongju!</h2>
+    <div style="margin-bottom: 1em;">
+      <input type="text" id="address-input" placeholder="Enter address" style="padding: 0.5em; width: 60%; max-width: 400px;">
+      <select id="category-select" style="padding: 0.5em;">
+        <option value="">Select category</option>
+        <option value="tour">Tourist Attraction</option>
+        <option value="food">Restaurant</option>
+        <option value="cafe">Cafe</option>
+      </select>
+      <button onclick="searchPlaces()" style="padding: 0.5em 1em; background-color: #ff7f00; color: white; border: none; border-radius: 5px;">Search</button>
+    </div>
 
-    <main class="content">
-      <h2 id="tour-info">Welcome to Gyeongju!</h2>
-      <div style="margin-bottom: 1em;">
-        <input type="text" id="address-input" placeholder="Enter address" style="padding: 0.5em; width: 60%; max-width: 400px;">
-        <select id="category-select" style="padding: 0.5em;">
-          <option value="">Select category</option>
-          <option value="tour">Tourist Attraction</option>
-          <option value="food">Restaurant</option>
-          <option value="cafe">Cafe</option>
-        </select>
-        <button onclick="searchPlaces()" style="padding: 0.5em 1em; background-color: #ff7f00; color: white; border: none; border-radius: 5px;">Search</button>
-      </div>
+    <div id="place-cards" style="display: flex; flex-wrap: wrap; gap: 1em;"></div>
 
-      <div id="place-cards" style="display: flex; flex-wrap: wrap; gap: 1em;"></div>
-
-      <div id="plan-box" style="margin-top: 2em;">
-        <h3 id="plan-title" style="color: #ff7f00;">📝 My Plan</h3>
-        <ul id="plan-list" style="list-style: none; padding-left: 0;"></ul>
-      </div>
-    </main>
-  </div>
+    <div id="plan-box" style="margin-top: 2em;">
+      <h3 id="plan-title" style="color: #ff7f00;">📝 My Plan</h3>
+      <ul id="plan-list" style="list-style: none; padding-left: 0;"></ul>
+    </div>
+  </main>
 
   <script>
     function setLanguage(lang) {
